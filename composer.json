@@ -4,6 +4,13 @@
     "scripts": {
         "phpcs": "phpcs"
     },
+    "bin": [
+        "bin/gendiff"
+    ],
+    "autoload": {
+        "files": [
+        ]
+    },
     "require": {
         "docopt/docopt": "^1.0"
     },
