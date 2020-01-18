@@ -1,0 +1,22 @@
+{
+    "name": "dzencot/gendiff",
+    "type": "project",
+    "scripts": {
+        "phpcs": "phpcs"
+    },
+    "require": {
+        "docopt/docopt": "^1.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5"
+    },
+    "authors": [
+        {
+            "name": "Ivan Gagarinov",
+            "email": "dzencot@gmail.com"
+        }
+    ],
+    "keywords": ["hexlet", "brain-games"],
+    "description": "Generate diff",
+    "license": "MIT"
+}
