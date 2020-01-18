@@ -1,7 +1,7 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/982e5dc94d36b55c0719/maintainability)](https://codeclimate.com/github/dzencot/php-project-lvl1/maintainability)
-[![Build Status](https://travis-ci.org/dzencot/php-project-lvl1.svg?branch=master)](https://travis-ci.org/dzencot/php-project-lvl1)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f13c2808c393efacf278/maintainability)](https://codeclimate.com/github/dzencot/php-project-lvl2/maintainability)
+[![Build Status](https://travis-ci.org/dzencot/php-project-lvl2.svg?branch=master)](https://travis-ci.org/dzencot/php-project-lvl2)
 
-# Brain Games
+# Вычислитель отличий
 
 ## ASCIINEMA
 
