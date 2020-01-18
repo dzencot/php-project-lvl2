@@ -21,7 +21,6 @@ function genDiff(string $pathToFile1, string $pathToFile2, string $format): stri
     $formatter = getFormatter($format);
 
     $formattedDiff = $formatter($diff);
-    echo ($formattedDiff);
 
-    return '';
+    return $formattedDiff;
 }

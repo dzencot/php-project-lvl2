@@ -11,6 +11,7 @@ if (file_exists($autoloadPath1)) {
 }
 
 use function Differ\genDiff;
+use function cli\line;
 
 $doc = <<<DOC
 
@@ -41,4 +42,4 @@ $args = $handler->args;
     '<secondFile>' => $secondFile,
 ] = $args;
 
-genDiff($firstFile, $secondFile, $format);
+line(genDiff($firstFile, $secondFile, $format));
