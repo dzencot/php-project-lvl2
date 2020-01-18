@@ -9,6 +9,11 @@
     ],
     "autoload": {
         "files": [
+            "src/Differ.php",
+            "src/Parser.php",
+            "src/GetDiff.php",
+            "src/Formatter/Formatter.php",
+            "src/Formatter/Pretty.php"
         ]
     },
     "require": {
