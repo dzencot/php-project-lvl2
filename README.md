@@ -4,7 +4,8 @@
 
 # Вычислитель отличий
 
-## ASCIINEMA
+## Asciinema
+[![asciicast](https://asciinema.org/a/5qAtEfxRa93diyzElM9NrEhJW.svg)](https://asciinema.org/a/5qAtEfxRa93diyzElM9NrEhJW)
 
 ## Prerequisites
 
