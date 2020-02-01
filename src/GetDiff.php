@@ -26,7 +26,7 @@ function getDiff(array $before, array $after): array
                 ];
             } elseif (is_array($beforeData)) {
                 return [
-                    'status' => 'array',
+                    'type' => 'array',
                     'data' => $helper($beforeData, $afterData),
                 ];
             } else {

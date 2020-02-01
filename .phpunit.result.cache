@@ -1,1 +1,1 @@
-C:37:"PHPUnit\Runner\DefaultTestResultCache":86:{a:2:{s:7:"defects";a:0:{}s:5:"times";a:1:{s:26:"GenDiffTest::testPlainData";d:0.002;}}}
+C:37:"PHPUnit\Runner\DefaultTestResultCache":124:{a:2:{s:7:"defects";a:1:{s:26:"GenDiffTest::testPlainData";i:3;}s:5:"times";a:1:{s:26:"GenDiffTest::testPlainData";d:0.005;}}}

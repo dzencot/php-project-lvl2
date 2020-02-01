@@ -40,12 +40,12 @@ function prettyNode($node, $level)
         case 'unchanged':
             $value = $getPrettiedData($data, $level);
             return "${tab}  ${name}: ${value}";
-        case 'array':
-            $valueArr = array_map(function ($item) use ($level) {
-                return "\n" . prettyNode($item, $level + 1);
-            }, $data);
-            $value = implode("${tab}\n", array_values($valueArr));
-            return "${tab}  ${name}: {" . "${value}" . "\n${tab}}";
+        /* case 'array': */
+        /*     $valueArr = array_map(function ($item) use ($level) { */
+        /*         return "\n" . prettyNode($item, $level + 1); */
+        /*     }, $data); */
+        /*     $value = implode("${tab}\n", array_values($valueArr)); */
+        /*     return "${tab}  ${name}: {" . "${value}" . "\n${tab}}"; */
         default:
             $valueArr = array_map(function ($item) use ($level) {
                 return "\n" . prettyNode($item, $level + 1);

@@ -10,11 +10,19 @@ function genDiff(string $pathToFile1, string $pathToFile2, string $format): stri
 {
     $file1Content = file_get_contents($pathToFile1);
     $file2Content = file_get_contents($pathToFile2);
-    $extension = 'json';
-    $parser = getParser($extension);
 
-    $file1Parsed = $parser($file1Content);
-    $file2Parsed = $parser($file2Content);
+    $file1PathInfo = pathinfo($pathToFile1);
+    $file2PathInfo = pathinfo($pathToFile2);
+
+    $file1Parser = getParser($file1PathInfo['extension']);
+    $file2Parser = getParser($file2PathInfo['extension']);
+
+    $file1Parsed = $file1Parser($file1Content);
+    $file2Parsed = $file2Parser($file2Content);
+
+    if (!$file1Content || !$file2Content) {
+        throw new \Exception("Content is empty");
+    }
 
     $diff = getDiff($file1Parsed, $file2Parsed);
 
