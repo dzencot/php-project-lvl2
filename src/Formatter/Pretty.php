@@ -2,65 +2,79 @@
 
 namespace Formatter\Pretty;
 
-function prettyNode($node, $level)
+function getPrettiedValue($value, int $depth): string
 {
-    $status = $node['status'];
-    $name = $node['name'];
-    $data = $node['data'];
-    $tab = str_repeat('  ', $level);
-
-    $getPrettiedData = function ($currentData, $currentLevel) use (&$getPrettiedData): string {
-        if (is_array($currentData)) {
-            $tab = str_repeat('  ', $currentLevel);
-            $valueArr = array_map(function ($item) use ($getPrettiedData, $currentLevel) {
-                $newTab = str_repeat('  ', $currentLevel + 1);
-                return "\n${newTab}  " . $getPrettiedData($item, $currentLevel + 1);
-            }, $currentData);
-            $value = implode("${tab}\n", $valueArr);
-            return "{" . "${value}" . "\n${tab}}";
-        }
-        if (is_bool($currentData)) {
-            return $currentData ? 'true' : 'false';
-        }
-        return $currentData;
-    };
-
-    switch ($status) {
-        case 'added':
-            $value = $getPrettiedData($data, $level);
-            return "${tab}+ ${name}: ${value}";
-        case 'removed':
-            $value = $getPrettiedData($data, $level);
-            return "${tab}- ${name}: ${value}";
-        case 'updated':
-            $value = $getPrettiedData($data, $level);
-            $beforeData = $node['previous'];
-            $valueBefore = $getPrettiedData($beforeData, $level);
-            return "${tab}+ ${name}: ${value}\n${tab}- ${name}: ${valueBefore}";
-        case 'unchanged':
-            $value = $getPrettiedData($data, $level);
-            return "${tab}  ${name}: ${value}";
-        /* case 'array': */
-        /*     $valueArr = array_map(function ($item) use ($level) { */
-        /*         return "\n" . prettyNode($item, $level + 1); */
-        /*     }, $data); */
-        /*     $value = implode("${tab}\n", array_values($valueArr)); */
-        /*     return "${tab}  ${name}: {" . "${value}" . "\n${tab}}"; */
-        default:
-            $valueArr = array_map(function ($item) use ($level) {
-                return "\n" . prettyNode($item, $level + 1);
-            }, $data);
-            $value = implode("${tab}\n", $valueArr);
-            return "${tab}  ${name}: {" . "${value}" . "\n${tab}}";
+    if (is_array($value) || is_object($value)) {
+        $openTab = str_repeat(' ', ($depth + 1) * 4);
+        $closeTab = str_repeat(' ', $depth * 4);
+        $valueArr = array_map(function ($key) use ($value) {
+            $prettiedData = getPrettiedValue($value[$key], 0);
+            return "{$key}: {$prettiedData}";
+        }, array_keys($value));
+        $value = implode("\n", $valueArr);
+        return "{\n{$openTab}{$value}\n{$closeTab}}";
     }
+    if (is_bool($value)) {
+        return $value ? 'true' : 'false';
+    }
+    return $value;
 }
 
-function pretty($data)
+function iter(array $tree, int $depth = 1): string
 {
-    $separator = "\n";
-    $prettyArray = array_map(function ($item) {
-        return prettyNode($item, 1);
-    }, $data);
-    $prettyString = implode($separator, $prettyArray);
-    return '{' . $separator . $prettyString . $separator . "}\n";
+    $prettiedArray = array_map(function ($node) use ($depth) {
+        switch ($node['type']) {
+            case 'nested':
+                $tab = str_repeat(' ', $depth * 4);
+                $prettiedValue = iter($node['children'], $depth + 1);
+                $name = $node['name'];
+                return "{$tab}{$name}: {\n{$prettiedValue}\n{$tab}}";
+                break;
+            case 'added':
+                $tab = str_repeat(' ', $depth * 4 - 2);
+                $value = $node['newValue'];
+                $name = $node['name'];
+                $prettiedValue = getPrettiedValue($value, $depth);
+                return "{$tab}+ {$name}: {$prettiedValue}";
+                break;
+            case 'removed':
+                $tab = str_repeat(' ', $depth * 4 - 2);
+                $value = $node['oldValue'];
+                $name = $node['name'];
+                $prettiedValue = getPrettiedValue($value, $depth);
+                return "{$tab}- {$name}: {$prettiedValue}";
+                break;
+            case 'updated':
+                $tab = str_repeat(' ', $depth * 4 - 2);
+                $newValue = $node['newValue'];
+                $oldValue = $node['oldValue'];
+                $name = $node['name'];
+                $prettiedNewValue = getPrettiedValue($newValue, $depth);
+                $prettiedOldValue = getPrettiedValue($oldValue, $depth);
+                $prettiedData = [
+                    "{$tab}+ {$name}: {$prettiedNewValue}",
+                    "{$tab}- {$name}: {$prettiedOldValue}",
+                ];
+                return implode("\n", $prettiedData);
+                break;
+            case 'unchanged':
+                $tab = str_repeat(' ', $depth * 4 - 2);
+                $value = $node['value'];
+                $name = $node['name'];
+                $prettiedValue = getPrettiedValue($value, $depth);
+                return "{$tab}  {$name}: {$prettiedValue}";
+                break;
+            default:
+                throw new \Exception("Unknown type node: {$node['type']}");
+        }
+    }, $tree);
+
+    $prettiedString = implode("\n", $prettiedArray);
+    return $prettiedString;
+}
+
+function pretty($tree): string
+{
+    $prettiedString = iter($tree, 1);
+    return "{\n{$prettiedString}\n}";
 }

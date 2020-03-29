@@ -5,35 +5,41 @@ namespace GetDiff;
 function getDiff(array $before, array $after): array
 {
     $helper = function ($data1, $data2) use (&$helper) {
-        $getComparedData = function ($beforeData, $afterData) use ($helper): array {
+        $getComparedData = function ($name, $beforeData, $afterData) use ($helper): array {
+            $isArrays = is_array($beforeData) && is_array($afterData);
+            if ($isArrays) {
+                $children = $helper($beforeData, $afterData);
+                return [
+                    'name' => $name,
+                    'type' => 'nested',
+                    'children' => $children,
+                ];
+            }
+
             if ($beforeData === $afterData) {
                 return [
-                    'status' => 'unchanged',
-                    'data' => $beforeData,
-                    'previous' => null,
+                    'name' => $name,
+                    'type' => 'unchanged',
+                    'value' => $beforeData,
                 ];
             } elseif (!$beforeData) {
                 return [
-                    'status' => 'added',
-                    'data' => $afterData,
-                    'previous' => null,
+                    'name' => $name,
+                    'type' => 'added',
+                    'newValue' => $afterData,
                 ];
             } elseif (!$afterData) {
                 return [
-                    'status' => 'removed',
-                    'data' => $beforeData,
-                    'previous' => null,
+                    'name' => $name,
+                    'type' => 'removed',
+                    'oldValue' => $beforeData,
                 ];
-            } elseif (is_array($beforeData)) {
+            } elseif ($beforeData !== $afterData) {
                 return [
-                    'type' => 'array',
-                    'data' => $helper($beforeData, $afterData),
-                ];
-            } else {
-                return [
-                    'status' => 'updated',
-                    'data' => $afterData,
-                    'previous' => $beforeData,
+                    'name' => $name,
+                    'type' => 'updated',
+                    'newValue' => $afterData,
+                    'oldValue' => $beforeData,
                 ];
             }
         };
@@ -42,8 +48,8 @@ function getDiff(array $before, array $after): array
         $diff = array_map(function ($key) use ($getComparedData, $data1, $data2) {
             $beforeValue = $data1[$key] ?? null;
             $afterValue = $data2[$key] ?? null;
-            $comparedData = $getComparedData($beforeValue, $afterValue);
-            return array_merge(['name' => $key], $comparedData);
+            $comparedData = $getComparedData($key, $beforeValue, $afterValue);
+            return $comparedData;
         }, $allKeys);
         return $diff;
     };
