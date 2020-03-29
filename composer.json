@@ -14,7 +14,8 @@
             "src/Parser.php",
             "src/GetDiff.php",
             "src/Formatter/Formatter.php",
-            "src/Formatter/Pretty.php"
+            "src/Formatter/Pretty.php",
+            "src/Formatter/Plain.php"
         ]
     },
     "require": {

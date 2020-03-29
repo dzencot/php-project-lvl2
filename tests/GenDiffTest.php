@@ -22,7 +22,7 @@ class GenDiffTest extends TestCase
     protected function setUp(): void
     {
         $this->expectedPlainPath = './tests/fixtures/plain-diff.txt';
-        $this->expectedPrettyPath = './tests/fixtures/tree-diff.txt';
+        $this->expectedPrettyPath = './tests/fixtures/pretty-diff.txt';
 
         $this->jsonTreeBeforePath = './tests/fixtures/tree-before.json';
         $this->jsonTreeAfterPath = './tests/fixtures/tree-after.json';
@@ -39,6 +39,17 @@ class GenDiffTest extends TestCase
         $this->assertEquals($expected, $resultJson);
 
         $resultYml = genDiff($this->ymlTreeBeforePath, $this->ymlTreeAfterPath, 'pretty');
+        $this->assertEquals($expected, $resultYml);
+    }
+
+    public function testPlain(): void
+    {
+        $expected = trim(file_get_contents($this->expectedPlainPath));
+
+        $resultJson = genDiff($this->jsonTreeBeforePath, $this->jsonTreeAfterPath, 'plain');
+        $this->assertEquals($expected, $resultJson);
+
+        $resultYml = genDiff($this->ymlTreeBeforePath, $this->ymlTreeAfterPath, 'plain');
         $this->assertEquals($expected, $resultYml);
     }
 }

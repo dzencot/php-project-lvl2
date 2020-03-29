@@ -24,9 +24,6 @@ function genDiff(string $pathToFile1, string $pathToFile2, string $format): stri
         throw new \Exception("Content is empty");
     }
 
-    /* print_r($file1Parsed); */
-    /* print_r($file2Parsed); */
-
     $diff = getDiff($file1Parsed, $file2Parsed);
 
     $formatter = getFormatter($format);
