@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1585466779">
-  <project timestamp="1585466779">
+<coverage generated="1585468177">
+  <project timestamp="1585468177">
     <file name="/home/ivan/projects/php-project-lvl2/src/Differ.php">
-      <line num="11" type="stmt" count="2"/>
-      <line num="12" type="stmt" count="2"/>
-      <line num="14" type="stmt" count="2"/>
-      <line num="15" type="stmt" count="2"/>
-      <line num="17" type="stmt" count="2"/>
-      <line num="18" type="stmt" count="2"/>
-      <line num="20" type="stmt" count="2"/>
-      <line num="21" type="stmt" count="2"/>
-      <line num="23" type="stmt" count="2"/>
+      <line num="11" type="stmt" count="3"/>
+      <line num="12" type="stmt" count="3"/>
+      <line num="14" type="stmt" count="3"/>
+      <line num="15" type="stmt" count="3"/>
+      <line num="17" type="stmt" count="3"/>
+      <line num="18" type="stmt" count="3"/>
+      <line num="20" type="stmt" count="3"/>
+      <line num="21" type="stmt" count="3"/>
+      <line num="23" type="stmt" count="3"/>
       <line num="24" type="stmt" count="0"/>
-      <line num="27" type="stmt" count="2"/>
-      <line num="29" type="stmt" count="2"/>
-      <line num="31" type="stmt" count="2"/>
-      <line num="33" type="stmt" count="2"/>
+      <line num="27" type="stmt" count="3"/>
+      <line num="29" type="stmt" count="3"/>
+      <line num="31" type="stmt" count="3"/>
+      <line num="33" type="stmt" count="3"/>
       <metrics loc="34" ncloc="34" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="13" elements="14" coveredelements="13"/>
     </file>
     <file name="/home/ivan/projects/php-project-lvl2/src/Formatter/Formatter.php">
-      <line num="10" type="stmt" count="2"/>
-      <line num="11" type="stmt" count="2"/>
-      <line num="13" type="stmt" count="1"/>
+      <line num="11" type="stmt" count="3"/>
+      <line num="12" type="stmt" count="3"/>
       <line num="14" type="stmt" count="1"/>
       <line num="15" type="stmt" count="1"/>
-      <line num="17" type="stmt" count="1"/>
+      <line num="16" type="stmt" count="2"/>
       <line num="18" type="stmt" count="1"/>
-      <line num="20" type="stmt" count="0"/>
-      <metrics loc="22" ncloc="22" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="7" elements="8" coveredelements="7"/>
+      <line num="19" type="stmt" count="1"/>
+      <line num="20" type="stmt" count="1"/>
+      <line num="22" type="stmt" count="1"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="25" type="stmt" count="0"/>
+      <metrics loc="27" ncloc="27" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="10" elements="11" coveredelements="10"/>
+    </file>
+    <file name="/home/ivan/projects/php-project-lvl2/src/Formatter/Json.php">
+      <line num="7" type="stmt" count="1"/>
+      <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="1" coveredelements="1"/>
     </file>
     <file name="/home/ivan/projects/php-project-lvl2/src/Formatter/Plain.php">
       <line num="8" type="stmt" count="0"/>
@@ -112,51 +119,51 @@
       <metrics loc="80" ncloc="80" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="51" coveredstatements="50" elements="51" coveredelements="50"/>
     </file>
     <file name="/home/ivan/projects/php-project-lvl2/src/GetDiff.php">
-      <line num="9" type="stmt" count="2"/>
-      <line num="10" type="stmt" count="2"/>
-      <line num="11" type="stmt" count="2"/>
-      <line num="13" type="stmt" count="2"/>
-      <line num="14" type="stmt" count="2"/>
-      <line num="15" type="stmt" count="2"/>
-      <line num="19" type="stmt" count="2"/>
-      <line num="21" type="stmt" count="2"/>
-      <line num="22" type="stmt" count="2"/>
-      <line num="23" type="stmt" count="2"/>
-      <line num="25" type="stmt" count="2"/>
-      <line num="27" type="stmt" count="2"/>
-      <line num="28" type="stmt" count="2"/>
-      <line num="29" type="stmt" count="2"/>
-      <line num="31" type="stmt" count="2"/>
-      <line num="33" type="stmt" count="2"/>
-      <line num="34" type="stmt" count="2"/>
-      <line num="35" type="stmt" count="2"/>
-      <line num="37" type="stmt" count="2"/>
-      <line num="39" type="stmt" count="2"/>
-      <line num="40" type="stmt" count="2"/>
-      <line num="41" type="stmt" count="2"/>
-      <line num="42" type="stmt" count="2"/>
-      <line num="45" type="stmt" count="2"/>
-      <line num="47" type="stmt" count="2"/>
-      <line num="49" type="stmt" count="2"/>
-      <line num="50" type="stmt" count="2"/>
-      <line num="51" type="stmt" count="2"/>
-      <line num="52" type="stmt" count="2"/>
-      <line num="53" type="stmt" count="2"/>
-      <line num="54" type="stmt" count="2"/>
-      <line num="55" type="stmt" count="2"/>
-      <line num="57" type="stmt" count="2"/>
+      <line num="9" type="stmt" count="3"/>
+      <line num="10" type="stmt" count="3"/>
+      <line num="11" type="stmt" count="3"/>
+      <line num="13" type="stmt" count="3"/>
+      <line num="14" type="stmt" count="3"/>
+      <line num="15" type="stmt" count="3"/>
+      <line num="19" type="stmt" count="3"/>
+      <line num="21" type="stmt" count="3"/>
+      <line num="22" type="stmt" count="3"/>
+      <line num="23" type="stmt" count="3"/>
+      <line num="25" type="stmt" count="3"/>
+      <line num="27" type="stmt" count="3"/>
+      <line num="28" type="stmt" count="3"/>
+      <line num="29" type="stmt" count="3"/>
+      <line num="31" type="stmt" count="3"/>
+      <line num="33" type="stmt" count="3"/>
+      <line num="34" type="stmt" count="3"/>
+      <line num="35" type="stmt" count="3"/>
+      <line num="37" type="stmt" count="3"/>
+      <line num="39" type="stmt" count="3"/>
+      <line num="40" type="stmt" count="3"/>
+      <line num="41" type="stmt" count="3"/>
+      <line num="42" type="stmt" count="3"/>
+      <line num="45" type="stmt" count="3"/>
+      <line num="47" type="stmt" count="3"/>
+      <line num="49" type="stmt" count="3"/>
+      <line num="50" type="stmt" count="3"/>
+      <line num="51" type="stmt" count="3"/>
+      <line num="52" type="stmt" count="3"/>
+      <line num="53" type="stmt" count="3"/>
+      <line num="54" type="stmt" count="3"/>
+      <line num="55" type="stmt" count="3"/>
+      <line num="57" type="stmt" count="3"/>
       <metrics loc="58" ncloc="58" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="33" elements="33" coveredelements="33"/>
     </file>
     <file name="/home/ivan/projects/php-project-lvl2/src/Parser.php">
-      <line num="11" type="stmt" count="2"/>
-      <line num="12" type="stmt" count="2"/>
-      <line num="14" type="stmt" count="2"/>
-      <line num="15" type="stmt" count="2"/>
-      <line num="18" type="stmt" count="2"/>
+      <line num="11" type="stmt" count="3"/>
+      <line num="12" type="stmt" count="3"/>
+      <line num="14" type="stmt" count="3"/>
+      <line num="15" type="stmt" count="3"/>
+      <line num="18" type="stmt" count="3"/>
       <line num="19" type="stmt" count="0"/>
-      <line num="22" type="stmt" count="2"/>
+      <line num="22" type="stmt" count="3"/>
       <metrics loc="23" ncloc="23" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="6" elements="7" coveredelements="6"/>
     </file>
-    <metrics files="6" loc="263" ncloc="263" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="138" coveredstatements="131" elements="138" coveredelements="131"/>
+    <metrics files="7" loc="276" ncloc="276" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="142" coveredstatements="135" elements="142" coveredelements="135"/>
   </project>
 </coverage>

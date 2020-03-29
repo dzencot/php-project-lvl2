@@ -15,7 +15,8 @@
             "src/GetDiff.php",
             "src/Formatter/Formatter.php",
             "src/Formatter/Pretty.php",
-            "src/Formatter/Plain.php"
+            "src/Formatter/Plain.php",
+            "src/Formatter/Json.php"
         ]
     },
     "require": {
