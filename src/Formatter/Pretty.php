@@ -1,6 +1,6 @@
 <?php
 
-namespace Formatter\Pretty;
+namespace Differ\Formatter\Pretty;
 
 function getPrettiedValue($value, int $depth): string
 {
@@ -27,43 +27,28 @@ function iter(array $tree, int $depth = 1): string
             case 'nested':
                 $tab = str_repeat(' ', $depth * 4);
                 $prettiedValue = iter($node['children'], $depth + 1);
-                $name = $node['name'];
-                return "{$tab}{$name}: {\n{$prettiedValue}\n{$tab}}";
-                break;
+                return "{$tab}{$node['name']}: {\n{$prettiedValue}\n{$tab}}";
             case 'added':
                 $tab = str_repeat(' ', $depth * 4 - 2);
-                $value = $node['newValue'];
-                $name = $node['name'];
-                $prettiedValue = getPrettiedValue($value, $depth);
-                return "{$tab}+ {$name}: {$prettiedValue}";
-                break;
+                $prettiedValue = getPrettiedValue($node['newValue'], $depth);
+                return "{$tab}+ {$node['name']}: {$prettiedValue}";
             case 'removed':
                 $tab = str_repeat(' ', $depth * 4 - 2);
-                $value = $node['oldValue'];
-                $name = $node['name'];
-                $prettiedValue = getPrettiedValue($value, $depth);
-                return "{$tab}- {$name}: {$prettiedValue}";
-                break;
+                $prettiedValue = getPrettiedValue($node['oldValue'], $depth);
+                return "{$tab}- {$node['name']}: {$prettiedValue}";
             case 'updated':
                 $tab = str_repeat(' ', $depth * 4 - 2);
-                $newValue = $node['newValue'];
-                $oldValue = $node['oldValue'];
-                $name = $node['name'];
-                $prettiedNewValue = getPrettiedValue($newValue, $depth);
-                $prettiedOldValue = getPrettiedValue($oldValue, $depth);
+                $prettiedNewValue = getPrettiedValue($node['newValue'], $depth);
+                $prettiedOldValue = getPrettiedValue($node['oldValue'], $depth);
                 $prettiedData = [
-                    "{$tab}+ {$name}: {$prettiedNewValue}",
-                    "{$tab}- {$name}: {$prettiedOldValue}",
+                    "{$tab}+ {$node['name']}: {$prettiedNewValue}",
+                    "{$tab}- {$node['name']}: {$prettiedOldValue}",
                 ];
                 return implode("\n", $prettiedData);
-                break;
             case 'unchanged':
                 $tab = str_repeat(' ', $depth * 4 - 2);
-                $value = $node['value'];
-                $name = $node['name'];
-                $prettiedValue = getPrettiedValue($value, $depth);
-                return "{$tab}  {$name}: {$prettiedValue}";
-                break;
+                $prettiedValue = getPrettiedValue($node['value'], $depth);
+                return "{$tab}  {$node['name']}: {$prettiedValue}";
             default:
                 throw new \Exception("Unknown type node: {$node['type']}");
         }
@@ -73,7 +58,7 @@ function iter(array $tree, int $depth = 1): string
     return $prettiedString;
 }
 
-function pretty($tree): string
+function render($tree): string
 {
     $prettiedString = iter($tree, 1);
     return "{\n{$prettiedString}\n}";

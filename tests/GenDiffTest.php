@@ -1,23 +1,21 @@
 <?php
 
+namespace Differ\tests;
+
 use PHPUnit\Framework\TestCase;
 use function Differ\genDiff;
 
 class GenDiffTest extends TestCase
 {
-    protected $jsonPlainBeforePath;
-    protected $jsonPlainAfterPath;
-
     protected $jsonTreeBeforePath;
     protected $jsonTreeAfterPath;
-
-    protected $ymlPlainBeforePath;
-    protected $ymlPlainAfterPath;
 
     protected $ymlTreeBeforePath;
     protected $ymlTreeAfterPath;
 
-    protected $resultPlain;
+    protected $expectedPlainPath;
+    protected $expectedPrettyPath;
+    protected $expectedJsonPath;
 
     protected function setUp(): void
     {

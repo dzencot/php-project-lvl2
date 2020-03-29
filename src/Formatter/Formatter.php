@@ -1,27 +1,19 @@
 <?php
 
-namespace Formatter;
+namespace Differ\Formatter;
 
-use function Formatter\Pretty\pretty;
-use function Formatter\Plain\plain;
-use function Formatter\Json\json;
-
-function getFormatter(string $format)
+function getFormatter(string $format): callable
 {
-    switch ($format) {
-        case 'pretty':
-            return function ($data) {
-                return pretty($data);
-            };
-        case 'plain':
-            return function ($data) {
-                return plain($data);
-            };
-        case 'json':
-            return function ($data) {
-                return json($data);
-            };
-        default:
-            throw new \Exception("Unknown format: {$format}");
-    }
+    return function ($data) use ($format) {
+        switch ($format) {
+            case 'pretty':
+                return Pretty\render($data);
+            case 'plain':
+                return Plain\render($data);
+            case 'json':
+                return Json\render($data);
+            default:
+                throw new \Exception("Unknown format: {$format}");
+        }
+    };
 }

@@ -1,32 +1,28 @@
 <?php
 
-namespace Formatter\Plain;
+namespace Differ\Formatter\Plain;
 
-function getPropretyName($paths)
+function getPlainValue($value): string
 {
-    $paths = array_filter($paths, function ($name) {
-        return $name;
-    });
-    return implode('.', $paths);
+    $plainValue = is_array($value) ? 'complex value' : $value;
+    return $plainValue;
 }
-
-function iter($tree, $paths = null): string
+function iter($tree, $property = ''): string
 {
-    $plainLines = array_map(function ($node) use ($paths) {
-        $paths[] = $node['name'];
-        $propertyName = implode(".", $paths);
+    $plainLines = array_map(function ($node) use ($property) {
+        $propertyName = $property ? "{$property}.{$node['name']}" : $node['name'];
         switch ($node['type']) {
             case 'nested':
-                return iter($node['children'], $paths);
+                return iter($node['children'], $propertyName);
             case 'added':
-                $value = is_array($node['newValue']) ? 'complex value' : $node['newValue'];
+                $value = getPlainValue($node['newValue']);
                 return "Property '{$propertyName}' was added with value: '{$value}'";
             case 'removed':
-                $value = is_array($node['oldValue']) ? 'complex value' : $node['oldValue'];
+                $value = getPlainValue($node['oldValue']);
                 return "Property '{$propertyName}' was removed";
             case 'updated':
-                $newValue = is_array($node['newValue']) ? 'complex value' : $node['newValue'];
-                $oldValue = is_array($node['oldValue']) ? 'complex value' : $node['oldValue'];
+                $newValue = getPlainValue($node['newValue']);
+                $oldValue = getPlainValue($node['oldValue']);
                 return "Property '{$propertyName}' was changed. From '{$oldValue}' to '{$newValue}'";
             default:
                 return null;
@@ -39,7 +35,7 @@ function iter($tree, $paths = null): string
     return implode("\n", $plainLines);
 }
 
-function plain($tree)
+function render($tree): string
 {
     $result = iter($tree, null);
     return $result;

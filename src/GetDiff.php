@@ -1,6 +1,6 @@
 <?php
 
-namespace GetDiff;
+namespace Differ\GetDiff;
 
 function getDiff(array $before, array $after): array
 {
