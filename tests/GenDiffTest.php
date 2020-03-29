@@ -21,37 +21,24 @@ class GenDiffTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->resultPlain = trim(file_get_contents('./tests/fixtures/plain-diff.txt'));
-        $this->resultTree = trim(file_get_contents('./tests/fixtures/tree-diff.txt'));
-
-        $this->jsonPlainBeforePath = './tests/fixtures/plain-before.json';
-        $this->jsonPlainAfterPath = './tests/fixtures/plain-after.json';
+        $this->expectedPlainPath = './tests/fixtures/plain-diff.txt';
+        $this->expectedPrettyPath = './tests/fixtures/tree-diff.txt';
 
         $this->jsonTreeBeforePath = './tests/fixtures/tree-before.json';
         $this->jsonTreeAfterPath = './tests/fixtures/tree-after.json';
-
-        $this->ymlPlainBeforePath = './tests/fixtures/plain-before.yml';
-        $this->ymlPlainAfterPath = './tests/fixtures/plain-after.yml';
 
         $this->ymlTreeBeforePath = './tests/fixtures/tree-before.yml';
         $this->ymlTreeAfterPath = './tests/fixtures/tree-after.yml';
     }
 
-    public function testPlainJsonData(): void
+    public function testPretty(): void
     {
-        $expectPlainJson = genDiff($this->jsonPlainBeforePath, $this->jsonPlainAfterPath, 'pretty');
-        $this->assertEquals($expectPlainJson, $this->resultPlain);
-    }
+        $expected = trim(file_get_contents($this->expectedPrettyPath));
 
-    public function testPlainYmlData(): void
-    {
-        $expectPlainYml = genDiff($this->ymlPlainBeforePath, $this->ymlPlainAfterPath, 'pretty');
-        $this->assertEquals($expectPlainYml, $this->resultPlain);
-    }
+        $resultJson = genDiff($this->jsonTreeBeforePath, $this->jsonTreeAfterPath, 'pretty');
+        $this->assertEquals($expected, $resultJson);
 
-    public function testTreeJsonData(): void
-    {
-        $expectTreeJson = genDiff($this->jsonTreeBeforePath, $this->jsonTreeAfterPath, 'pretty');
-        $this->assertEquals($expectTreeJson, $this->resultTree);
+        $resultYml = genDiff($this->ymlTreeBeforePath, $this->ymlTreeAfterPath, 'pretty');
+        $this->assertEquals($expected, $resultYml);
     }
 }
