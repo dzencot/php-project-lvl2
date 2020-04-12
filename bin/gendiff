@@ -42,4 +42,4 @@ $args = $handler->args;
     '<secondFile>' => $secondFile,
 ] = $args;
 
-line(genDiff($firstFile, $secondFile, $format));
+line(genDiff($firstPath, $secondPath, $format));
