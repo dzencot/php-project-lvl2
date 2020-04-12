@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1586699367">
-  <project timestamp="1586699367">
+<coverage generated="1586700444">
+  <project timestamp="1586700444">
     <file name="/home/ivan/projects/php-project-lvl2/src/Differ.php">
       <line num="11" type="stmt" count="6"/>
       <line num="12" type="stmt" count="6"/>
@@ -141,15 +141,15 @@
       <metrics loc="58" ncloc="58" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="33" elements="33" coveredelements="33"/>
     </file>
     <file name="/home/ivan/projects/php-project-lvl2/src/Parser.php">
-      <line num="11" type="stmt" count="3"/>
-      <line num="12" type="stmt" count="6"/>
+      <line num="10" type="stmt" count="6"/>
+      <line num="11" type="stmt" count="6"/>
+      <line num="12" type="stmt" count="3"/>
+      <line num="13" type="stmt" count="3"/>
       <line num="14" type="stmt" count="3"/>
-      <line num="15" type="stmt" count="6"/>
+      <line num="16" type="stmt" count="0"/>
       <line num="18" type="stmt" count="6"/>
-      <line num="19" type="stmt" count="0"/>
-      <line num="22" type="stmt" count="6"/>
-      <metrics loc="23" ncloc="23" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="6" elements="7" coveredelements="6"/>
+      <metrics loc="19" ncloc="19" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="6" elements="7" coveredelements="6"/>
     </file>
-    <metrics files="7" loc="249" ncloc="249" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="128" coveredstatements="124" elements="128" coveredelements="124"/>
+    <metrics files="7" loc="245" ncloc="245" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="128" coveredstatements="124" elements="128" coveredelements="124"/>
   </project>
 </coverage>

@@ -4,20 +4,16 @@ namespace Differ\Parser;
 
 use Symfony\Component\Yaml\Yaml;
 
-function getParser(string $extension): callable
+function getParser(string $contentType): callable
 {
-    $parsers = [
-        'json' => function (string $content) {
-            return json_decode($content, true);
-        },
-        'yml' => function (string $content) {
-            return Yaml::parse($content);
+    return function ($content) use ($contentType) {
+        switch ($contentType) {
+            case 'json':
+                return json_decode($content, true);
+            case 'yml':
+                return Yaml::parse($content);
+            default:
+                throw new \Exception("Unknown content type: {$contentType}");
         }
-    ];
-
-    if (!array_key_exists($extension, $parsers)) {
-        throw new \Exception("Unknown extension ${extension}");
-    }
-
-    return $parsers[$extension];
+    };
 }
