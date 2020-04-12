@@ -38,8 +38,8 @@ $handler = Docopt::handle($doc, $settings);
 $args = $handler->args;
 [
     '--format' => $format,
-    '<firstFile>' => $firstFile,
-    '<secondFile>' => $secondFile,
+    '<firstFile>' => $firstFilePath,
+    '<secondFile>' => $secondFilePath,
 ] = $args;
 
-line(genDiff($firstPath, $secondPath, $format));
+line(genDiff($firstFilePath, $secondFilePath, $format));
