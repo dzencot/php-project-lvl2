@@ -9,7 +9,7 @@ use function Differ\genDiff;
 class GenDiffTest extends TestCase
 {
     private $extensions = ['json', 'yml'];
-    private $formatters = ['pretty', 'plain', 'json'];
+    private $formats = ['pretty', 'plain', 'json'];
 
     private function getFixturePath(string $fixtureName): string
     {
@@ -21,7 +21,7 @@ class GenDiffTest extends TestCase
     public function providerFixtures(): array
     {
         $fixtures = [];
-        foreach ($this->formatters as $format) {
+        foreach ($this->formats as $format) {
             foreach ($this->extensions as $extension) {
                 $name = "Format: {$format}. Extension: {$extension}.";
                 $beforeFixturePath = $this->getFixturePath("tree-before.{$extension}");
