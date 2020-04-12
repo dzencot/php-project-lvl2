@@ -8,59 +8,48 @@ use function Differ\genDiff;
 
 class GenDiffTest extends TestCase
 {
-    protected $jsonTreeBeforePath;
-    protected $jsonTreeAfterPath;
+    private $extensions = ['json', 'yml'];
+    private $formatters = ['pretty', 'plain', 'json'];
 
-    protected $ymlTreeBeforePath;
-    protected $ymlTreeAfterPath;
-
-    protected $expectedPlainPath;
-    protected $expectedPrettyPath;
-    protected $expectedJsonPath;
-
-    protected function setUp(): void
+    private function getFixturePath(string $fixtureName): string
     {
-        $this->expectedPlainPath = './tests/fixtures/plain-diff.txt';
-        $this->expectedPrettyPath = './tests/fixtures/pretty-diff.txt';
-        $this->expectedJsonPath = './tests/fixtures/json-diff.txt';
-
-        $this->jsonTreeBeforePath = './tests/fixtures/tree-before.json';
-        $this->jsonTreeAfterPath = './tests/fixtures/tree-after.json';
-
-        $this->ymlTreeBeforePath = './tests/fixtures/tree-before.yml';
-        $this->ymlTreeAfterPath = './tests/fixtures/tree-after.yml';
+        $fixturesDir = __DIR__ . "/fixtures/";
+        $fixturePath = $fixturesDir . $fixtureName;
+        return $fixturePath;
     }
 
-    public function testPretty(): void
+    public function providerFixtures(): array
     {
-        $expected = trim(file_get_contents($this->expectedPrettyPath));
-
-        $resultJson = genDiff($this->jsonTreeBeforePath, $this->jsonTreeAfterPath, 'pretty');
-        $this->assertEquals($expected, $resultJson);
-
-        $resultYml = genDiff($this->ymlTreeBeforePath, $this->ymlTreeAfterPath, 'pretty');
-        $this->assertEquals($expected, $resultYml);
+        $fixtures = [];
+        foreach ($this->formatters as $format) {
+            foreach ($this->extensions as $extension) {
+                $name = "Format: {$format}. Extension: {$extension}.";
+                $beforeFixturePath = $this->getFixturePath("tree-before.{$extension}");
+                $afterFixturePath = $this->getFixturePath("tree-after.{$extension}");
+                $expectedFixturePath = $this->getFixturePath("{$format}-diff.txt");
+                $fixtures[$name] = [
+                    $format,
+                    $beforeFixturePath,
+                    $afterFixturePath,
+                    $expectedFixturePath,
+                ];
+            }
+        }
+        return $fixtures;
     }
 
-    public function testPlain(): void
-    {
-        $expected = trim(file_get_contents($this->expectedPlainPath));
+    /**
+     * @dataProvider providerFixtures
+     */
+    public function testDiff(
+        string $format,
+        string $beforeFixturePath,
+        string $afterFixturePath,
+        string $expectedFixturePath
+    ): void {
+        $expected = trim(file_get_contents($expectedFixturePath));
 
-        $resultJson = genDiff($this->jsonTreeBeforePath, $this->jsonTreeAfterPath, 'plain');
-        $this->assertEquals($expected, $resultJson);
-
-        $resultYml = genDiff($this->ymlTreeBeforePath, $this->ymlTreeAfterPath, 'plain');
-        $this->assertEquals($expected, $resultYml);
-    }
-
-    public function testJson(): void
-    {
-        $expected = trim(file_get_contents($this->expectedJsonPath));
-
-        $resultJson = genDiff($this->jsonTreeBeforePath, $this->jsonTreeAfterPath, 'json');
-        $this->assertEquals($expected, $resultJson);
-
-        $resultYml = genDiff($this->ymlTreeBeforePath, $this->ymlTreeAfterPath, 'json');
-        $this->assertEquals($expected, $resultYml);
+        $result = genDiff($beforeFixturePath, $afterFixturePath, $format);
+        $this->assertEquals($expected, $result);
     }
 }
