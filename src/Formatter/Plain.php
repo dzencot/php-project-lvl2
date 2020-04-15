@@ -4,7 +4,7 @@ namespace Differ\Formatter\Plain;
 
 function getPlainValue($value): string
 {
-    $plainValue = is_array($value) ? 'complex value' : $value;
+    $plainValue = is_object($value) ? 'complex value' : $value;
     return $plainValue;
 }
 function iter($tree, $property = ''): string

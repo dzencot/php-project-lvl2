@@ -2,30 +2,35 @@
 
 namespace Differ\GetDiff;
 
-function getDiff(array $before, array $after): array
+use function Funct\Collection\union;
+
+function getDiff($before, $after): array
 {
     $process = function ($first, $second) use (&$process) {
-        $allKeys = array_unique(array_merge(array_keys($first), array_keys($second)));
+        $allKeys = array_unique(union(
+            array_keys(get_object_vars($first)),
+            array_keys(get_object_vars($second))
+        ));
         $diff = array_map(function ($key) use ($first, $second, $process) {
-            if (!array_key_exists($key, $first)) {
+            if (!property_exists($first, $key)) {
                 return [
                     'name' => $key,
                     'type' => 'added',
-                    'newValue' => $second[$key],
+                    'newValue' => $second->$key,
                 ];
-            } elseif (!array_key_exists($key, $second)) {
+            } elseif (!property_exists($second, $key)) {
                 return [
                     'name' => $key,
                     'type' => 'removed',
-                    'oldValue' => $first[$key],
+                    'oldValue' => $first->$key,
                 ];
             }
 
-            $beforeData = $first[$key];
-            $afterData = $second[$key];
-            $isArrays = is_array($beforeData) && is_array($afterData);
+            $beforeData = $first->$key;
+            $afterData = $second->$key;
+            $isObjects = is_object($beforeData) && is_object($afterData);
 
-            if ($isArrays) {
+            if ($isObjects) {
                 $children = $process($beforeData, $afterData);
                 return [
                     'name' => $key,

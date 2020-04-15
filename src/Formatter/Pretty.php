@@ -15,9 +15,9 @@ function getPrettiedValue($value, int $depth): string
     $openTab = str_repeat(' ', ($depth + 1) * 4);
     $closeTab = str_repeat(' ', $depth * 4);
     $valueArr = array_map(function ($key) use ($value) {
-        $prettiedData = getPrettiedValue($value[$key], 0);
+        $prettiedData = getPrettiedValue($value->$key, 0);
         return "{$key}: {$prettiedData}";
-    }, array_keys($value));
+    }, array_keys(get_object_vars($value)));
     $value = implode("\n", $valueArr);
     return "{\n{$openTab}{$value}\n{$closeTab}}";
 }
