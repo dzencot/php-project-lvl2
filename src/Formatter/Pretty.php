@@ -8,7 +8,7 @@ function getPrettiedValue($value, int $depth): string
         return $value ? 'true' : 'false';
     }
 
-    if (!is_array($value) && !is_object($value)) {
+    if (!is_object($value) && !is_array($value)) {
         return $value;
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1586973237">
-  <project timestamp="1586973237">
+<coverage generated="1586973431">
+  <project timestamp="1586973431">
     <file name="/home/ivan/projects/php-project-lvl2/src/Differ.php">
       <line num="11" type="stmt" count="6"/>
       <line num="12" type="stmt" count="6"/>
