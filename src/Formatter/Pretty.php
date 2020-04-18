@@ -24,7 +24,7 @@ function getPrettiedValue($value, int $depth): string
 
 function iter(array $tree, int $depth = 1): string
 {
-    $prettiedArray = array_map(function ($node) use ($depth) {
+    $prettiedLines = array_map(function ($node) use ($depth) {
         switch ($node['type']) {
             case 'nested':
                 $tab = str_repeat(' ', $depth * 4);
@@ -56,12 +56,11 @@ function iter(array $tree, int $depth = 1): string
         }
     }, $tree);
 
-    $prettiedString = implode("\n", $prettiedArray);
-    return $prettiedString;
+    return implode("\n", $prettiedLines);
 }
 
 function render($tree): string
 {
-    $prettiedString = iter($tree, 1);
-    return "{\n{$prettiedString}\n}";
+    $result = iter($tree, 1);
+    return "{\n{$result}\n}";
 }
