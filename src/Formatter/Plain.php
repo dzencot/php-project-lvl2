@@ -24,14 +24,14 @@ function iter($tree, $property = ''): string
                 $newValue = getPlainValue($node['newValue']);
                 $oldValue = getPlainValue($node['oldValue']);
                 return "Property '{$propertyName}' was changed. From '{$oldValue}' to '{$newValue}'";
-            default:
+            case 'unchanged':
                 return null;
+            default:
+                throw new \Exception("Unknown type: {$node['type']}");
         }
     }, $tree);
 
-    $plainLines = array_filter($plainLines, function ($line) {
-        return $line;
-    });
+    $plainLines = array_filter($plainLines, fn($line) => $line);
     return implode("\n", $plainLines);
 }
 
